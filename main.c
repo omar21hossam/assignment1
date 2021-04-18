@@ -1,29 +1,43 @@
 #include <stdio.h>
-struct
+
+// Contains student information
+struct StudentInfo
 {
   char name[25];
   int ID;
   int dateofbirth[3];
   int score;
-} studnetInfo;
-int
-main ()
-{
-  printf ("welcome\n");
-  printf ("Enter your name\n");
-  gets (studnetInfo.name);
-  printf ("Enter your ID\n");
-  scanf ("%d", &studnetInfo.ID);
-  printf ("Enter your date of birth(day, month, year)\n");
-  for (int i = 0; i < 3; i++)
-    {
-      scanf ("%d", &studnetInfo.dateofbirth[i]);
+};
 
-    }
-  printf ("Enter your score\n");
-  scanf ("%d", &studnetInfo.score);
-  printf ("%s   %d   %d   %d   %d   %d", studnetInfo.name, studnetInfo.ID,
-	  studnetInfo.dateofbirth[0], studnetInfo.dateofbirth[1],
-	  studnetInfo.dateofbirth[2], studnetInfo.score);
+// Fills student information from input stream
+void fillStudent(struct StudentInfo *student)
+{
+  printf("welcome\n");
+  printf("Enter your name\n");
+  gets(student->name);
+  printf("Enter your ID\n");
+  scanf("%d", &student->ID);
+  printf("Enter your date of birth(day, month, year)\n");
+  for (int i = 0; i < 3; i++)
+  {
+    scanf("%d", &student->dateofbirth[i]);
+  }
+  printf("Enter your score\n");
+  scanf("%d", &student->score);
+}
+
+// Prints student information to output stream
+void printStudent(const struct StudentInfo *student)
+{
+  printf("%s %d %d %d %d %d", student->name, student->ID,
+         student->dateofbirth[0], student->dateofbirth[1],
+         student->dateofbirth[2], student->score);
+}
+
+int main()
+{
+  struct StudentInfo student1;
+  fillStudent(&student1);
+  printStudent(&student1);
   return 0;
 }
