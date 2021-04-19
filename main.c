@@ -16,6 +16,9 @@ typedef struct StudentInfo
 // Fills student info from input stream
 void fillStudent(StudentInfo *student)
 {
+  printf("Enter ID: ");
+  scanf("%d", &student->ID);
+
   // Flush input
   int c;
   while ((c = getchar()) != '\n' && c != EOF)
@@ -24,9 +27,6 @@ void fillStudent(StudentInfo *student)
   printf("Enter name: ");
   fgets(student->name, sizeof(student->name), stdin);
   student->name[strcspn(student->name, "\n")] = 0;
-
-  printf("Enter ID: ");
-  scanf("%d", &student->ID);
 
   printf("Enter birth date (day month year): ");
   for (int i = 0; i < 3; i++)
@@ -62,7 +62,7 @@ void fillRandomStudent(StudentInfo *student)
 // Prints student info to output stream
 void printStudent(const StudentInfo *student)
 {
-  printf("%d: %s %d/%d/%d %d%%\n", student->ID, student->name,
+  printf("%d: %s %d/%d/%d %d%%\n\n", student->ID, student->name,
          student->dateofbirth[0], student->dateofbirth[1],
          student->dateofbirth[2], student->score);
 }
@@ -97,8 +97,23 @@ void printStudentTableFooter()
 
 int main()
 {
-  struct StudentInfo student1;
+  // ############ Welcome Text ############
+  printf("############### Welcome ###############\n\n");
+
+  // Create student 1
+  StudentInfo student1;
   fillStudent(&student1);
   printStudent(&student1);
+
+  // Create student 2
+  StudentInfo student2;
+  fillStudent(&student2);
+  printStudent(&student2);
+
+  // Print student table
+  printStudentTableHeader();
+  printStudentTable(&student1);
+  printStudentTable(&student2);
+  printStudentTableFooter();
   return 0;
 }
